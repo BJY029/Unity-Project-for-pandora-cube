@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class Reposition : MonoBehaviour
 {
+	//Collider 2D는 기본 도형의 모든 콜라이더2D를 포함한다.
+	Collider2D coll;
+
+	private void Awake()
+	{
+		coll = GetComponent<Collider2D>();
+	}
+
+
 	//Player의 Area(boxCollider)의 영역을 벗어났을 때 실행
 	void OnTriggerExit2D(Collider2D collision)
 	{
@@ -51,7 +60,12 @@ public class Reposition : MonoBehaviour
 				}
 				break;
 			case "Enemy":
-
+				if (coll.enabled) //몬스터가 살아있는 경우
+				{
+					//플레이어의 이동 방향에 따라 맞은 편에서 등장하도록 이동
+					//랜덤한 위치에서 등장하도록 벡터 더하기
+					transform.Translate(playerDir * 20 + new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f), 0f));
+				}
 				break;
 		}
 	}

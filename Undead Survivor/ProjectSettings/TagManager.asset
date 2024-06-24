@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - 'Area '
   - size
+  - Enemy
   layers:
   - Default
   - TransparentFX
