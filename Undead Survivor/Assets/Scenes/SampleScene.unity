@@ -200,6 +200,55 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 20, y: 20}
   m_EdgeRadius: 0
+--- !u!1 &75184129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 75184130}
+  - component: {fileID: 75184131}
+  m_Layer: 0
+  m_Name: Weapon 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &75184130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75184129}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1411443929}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &75184131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75184129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0085b23b32d6bcf43a3c99840963a18e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 1
+  prefabId: 2
+  damage: 3
+  count: 1
+  speed: 0
 --- !u!1 &75500622
 GameObject:
   m_ObjectHideFlags: 0
@@ -4676,6 +4725,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameTime: 0
   maxGameTime: 20
+  level: 0
+  kill: 0
+  exp: 0
+  nextExp: 03000000050000000a0000006400000096000000d20000001801000068010000c201000058020000
   player: {fileID: 1411443925}
   pool: {fileID: 663619623}
 --- !u!4 &406806616
@@ -4894,7 +4947,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 14.25
+  orthographic size: 14.388889
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -5177,6 +5230,7 @@ MonoBehaviour:
   prefaps:
   - {fileID: 990051464864382176, guid: ebd9d167ad26b3a4e99d222155d4f8d3, type: 3}
   - {fileID: 7128867737783060147, guid: 19edde532d9a84a4fb49d4438888fa25, type: 3}
+  - {fileID: 7358508482913229554, guid: fde8610dbb33bd649a795a0bf8aa4ae8, type: 3}
 --- !u!4 &663619624
 Transform:
   m_ObjectHideFlags: 0
@@ -14196,6 +14250,7 @@ GameObject:
   - component: {fileID: 1411443925}
   - component: {fileID: 1411443930}
   - component: {fileID: 1411443931}
+  - component: {fileID: 1411443932}
   m_Layer: 0
   m_Name: Player
   m_TagString: 'Area '
@@ -14217,6 +14272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputVec: {x: 0, y: 0}
   speed: 5
+  scanner: {fileID: 0}
 --- !u!70 &1411443926
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -14348,6 +14404,7 @@ Transform:
   - {fileID: 27452245}
   - {fileID: 789309639}
   - {fileID: 555513076}
+  - {fileID: 75184130}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1411443930
@@ -14401,6 +14458,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1411443932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411443924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 621bf7995ad47654a90c63cb21ca83fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scanRange: 7
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  nearestTarget: {fileID: 0}
 --- !u!1 &1502186320
 GameObject:
   m_ObjectHideFlags: 0
