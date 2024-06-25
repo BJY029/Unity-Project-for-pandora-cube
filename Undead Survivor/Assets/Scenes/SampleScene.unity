@@ -4674,6 +4674,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f668f87c580f79f489127f5529e937f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameTime: 0
+  maxGameTime: 20
   player: {fileID: 1411443925}
   pool: {fileID: 663619623}
 --- !u!4 &406806616
@@ -4892,7 +4894,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 14.444445
+  orthographic size: 14.25
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -5125,7 +5127,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefaps:
   - {fileID: 990051464864382176, guid: ebd9d167ad26b3a4e99d222155d4f8d3, type: 3}
-  - {fileID: 8091397212138073185, guid: 13c7c28b71d507143ae2b71014731eae, type: 3}
 --- !u!4 &663619624
 Transform:
   m_ObjectHideFlags: 0
@@ -9502,6 +9503,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: []
+  spawnDatas:
+  - spriteType: 0
+    spawnTime: 0.7
+    health: 10
+    speed: 1.5
+  - spriteType: 1
+    spawnTime: 0.2
+    health: 15
+    speed: 2.4
 --- !u!1 &893039943
 GameObject:
   m_ObjectHideFlags: 0
