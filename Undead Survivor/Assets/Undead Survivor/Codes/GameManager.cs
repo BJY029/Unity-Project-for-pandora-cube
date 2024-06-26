@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
 	//레벨, 킬수, 경험치 변수 선언
 	[Header("# Player Info")]
+	public int health;
+	public int maxHealth = 100;
 	public int level;
 	public int kill;
 	public int exp;
@@ -27,6 +29,11 @@ public class GameManager : MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
+	}
+
+	private void Start()
+	{
+		health = maxHealth;
 	}
 
 	//시간을 관리하는 함수

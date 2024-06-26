@@ -128,7 +128,7 @@ public class Enemy : MonoBehaviour
 
 			//죽은 시체가 다른 Enemy를 가리지 않도록,
 			//Enemy레이어(2) 보다 하나 작게 설정
-			spriter.sortingLayerID = 1;
+			spriter.sortingOrder = 1;
 
 			//애니메이션에서 Dead가 ture 된것을 활성화
 			anim.SetBool("Dead", true);

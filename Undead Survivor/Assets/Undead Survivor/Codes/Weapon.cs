@@ -17,12 +17,7 @@ public class Weapon : MonoBehaviour
 
 	private void Awake()
 	{
-        player = GetComponentInParent<Player>();
-	}
-
-	private void Start()
-	{
-		Init();
+        player = GameManager.instance.player;
 	}
 
 	void Update()
@@ -67,11 +62,42 @@ public class Weapon : MonoBehaviour
         this.count += cnt;   
 
         if(id == 0) Batch();
-    }
+
+		//BroadcastMessage : 특정 함수 호출을 모든 자식들에게 방송하는 함수
+		player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
+	}
 
     //초기화 함수
-	public void Init()
+	public void Init(ItemData data)
     {
+        //..Basic Setting
+        //스크립트블 오브젝트화 했던 것을 인자로 받아 데이터 초기화
+        name = "Weapon" + data.itemId;
+        //해당 데이터의 위치를 플레이어 자식으로 할당
+        transform.parent = player.transform;
+        //해당 위치의 월드내 위치를 초기화
+        transform.localPosition = Vector3.zero;
+
+
+        //..Property Setting
+        //해당 무기 프로펩의 각종 데이터를 초기화
+        id = data.itemId; 
+        damage =  data.baseDamage;
+        count = data.baseCount;
+        
+        //반복문을 통해서, poolmanager에 등록되어 있는 프리펩들을 돌아보고
+        //같은 이름을 발견하면, 해당 인덱스를 프리펩id로 초기화
+        //이렇게 하면, 스크립트블 오브젝트와 풀간의 독립성을 유지할 수 있다.
+        for(int i = 0; i < GameManager.instance.pool.prefaps.Length; i++)
+        {
+            if (data.projectile == GameManager.instance.pool.prefaps[i])
+            {
+                prefabId = i;
+                break;
+            }
+            
+        }
+
         switch (id)
         {
             case 0:
@@ -83,6 +109,9 @@ public class Weapon : MonoBehaviour
                 speed = 0.3f;
                 break;
         }
+
+        //BroadcastMessage : 특정 함수 호출을 모든 자식들에게 방송하는 함수
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
 
     //무기를 배치하는 함수
