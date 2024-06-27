@@ -1,6 +1,7 @@
 //수정된 코드
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.InputSystem; //새로운 라이브러리가 추가되었다.
 
@@ -29,6 +30,9 @@ public class Player : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		if (!GameManager.instance.isLive)
+			return;
+
 		//normalized는 액션 창에서 적용했기 때문에 삭제한다.
 		Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;
 		rigid.MovePosition(rigid.position + nextVec);
@@ -44,6 +48,9 @@ public class Player : MonoBehaviour
 	//프레임이 종료되기 전 실행되는 생명주기 함수
 	void LateUpdate()
 	{
+		if (!GameManager.instance.isLive)
+			return;
+
 		//애니메이터에서 설정한 파라메터와 동일한 타입으로 작성(speed 파라미터는 float)
 		//SetFloat("파라미터 이름", 값);
 		//inputVec.magnitude; 벡터의 순수한 크기값을 반환
@@ -51,5 +58,28 @@ public class Player : MonoBehaviour
 
 		//x값이 0이 아닐때, 만약 x값이 0보다 작으면 flipX는 true, 0보다 크면 flase 값을 갖게 된다.
 		if (inputVec.x != 0) spriter.flipX = inputVec.x < 0;
+	}
+
+
+	private void OnCollisionStay2D(Collision2D collision)
+	{
+		if(!GameManager.instance.isLive)
+			return;
+
+		GameManager.instance.health -= Time.deltaTime * 10;
+
+		if(GameManager.instance.health < 0)
+		{
+			//childCount : 자식 오브젝트의 개수
+			for(int i = 2; i < transform.childCount; i++)
+			{
+				//GetChild : 주어진 인덱스의 자식 오브젝트를 반환하는 함수
+				//해당 자식의 위치 컴포넌트로 이동 후, 해당 오브젝트로 이동해 활성화를 해제
+				transform.GetChild(i).gameObject.SetActive(false);
+			}
+
+			anim.SetTrigger("Dead");
+			GameManager.instance.GameOver();
+		}
 	}
 }

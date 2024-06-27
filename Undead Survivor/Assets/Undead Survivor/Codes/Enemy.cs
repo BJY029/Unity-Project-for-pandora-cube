@@ -34,6 +34,9 @@ public class Enemy : MonoBehaviour
 	// Update is called once per frame
 	private void FixedUpdate()
 	{
+		if (!GameManager.instance.isLive)
+			return;
+
 		//GetCurrentAnimatorStateInfo() : 현재 상태 정보를 가져오는 함수, 애니메이터의 레이어를 인자로 가진다
 		//현재 애니메이션의 레이어는 BaseLayer 하나밖에 없기 때문에 0을 인자로 넣어준다.
 		if (!isLive || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit")) return;
@@ -60,6 +63,9 @@ public class Enemy : MonoBehaviour
 
 	private void LateUpdate()
 	{
+		if (!GameManager.instance.isLive)
+			return;
+
 		//몬스터가 살아있는 경우에 실행
 		if (!isLive) return;
 

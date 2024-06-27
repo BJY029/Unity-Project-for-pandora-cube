@@ -22,6 +22,9 @@ public class Weapon : MonoBehaviour
 
 	void Update()
     {
+		if (!GameManager.instance.isLive)
+			return;
+
 		switch (id)
 		{
 			case 0:
@@ -49,11 +52,11 @@ public class Weapon : MonoBehaviour
 		}
 
         // .. Level Up TEST ..
-        if (Input.GetButtonDown("Jump"))
-        {
-            Debug.Log("레벨업 함수를 호출합니다.");
-            LevelUp(10, 1);
-        }
+        //if (Input.GetButtonDown("Jump"))
+        //{
+        //    Debug.Log("레벨업 함수를 호출합니다.");
+        //    LevelUp(10, 1);
+        //}
 	}
 
     public void LevelUp(float damage, int cnt)

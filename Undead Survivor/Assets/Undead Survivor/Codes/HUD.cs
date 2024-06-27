@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public class HUD : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class HUD : MonoBehaviour
 				//슬라이더에 적용할 값 : 현재 경험치 / 최대 경험치
 				//각 경험치의 값은 GameManager에서 관리하므로, 해당 값을 불러온다.
 				float curExp = GameManager.instance.exp;
-				float maxExp = GameManager.instance.nextExp[GameManager.instance.level];
+				float maxExp = GameManager.instance.nextExp[Mathf.Min(GameManager.instance.level, GameManager.instance.nextExp.Length - 1)];
 				mySlider.value = curExp / maxExp;
 				break;
 			case InfoType.Level:

@@ -13,6 +13,8 @@ public class Item : MonoBehaviour
 
     Image icon;
     Text textLevel;
+    Text textName;
+    Text textDesc;
 
 	private void Awake()
 	{
@@ -22,15 +24,42 @@ public class Item : MonoBehaviour
         //해당 아이콘의 스프라이트를, 스크립프트 오브젝트화 했던 것의 아이템 아이콘으로 부터 가져온다.
         icon.sprite = data.itemIcon;
 
-        //Text는 하나밖에 없기 때문에 그냥 가져와서 적용시킨다.
+        //GetComponents의 순서는 계층구조의 순서를 따라간다.
         Text[] texts = GetComponentsInChildren<Text>();
         textLevel = texts[0];                             
+        textName = texts[1];
+        textDesc = texts[2];
+        textName.text = data.itemName;
 	}
 
-
-	private void LateUpdate()
+    //레벨 업이 활성화 되었을 때 호출된다.
+	private void OnEnable()
 	{
+        //레벨 텍스트 초기화
 		textLevel.text = "Lv." + (level + 1);
+
+        //각 아이템 타입이 따라, 들어가는 매개변수 수가 다르기 때문에
+        //구분하기 위해 switch 문 사용
+        switch (data.itemType)
+        {
+            case ItemData.ItemType.Melle:
+            case ItemData.ItemType.Range:
+                //무기 설명에는 두개의 매개변수가 필요
+                //데미지 매개변수는 백분율로 나타내기 때문에 100을 곱한다.
+                textDesc.text = string.Format(data.itemDesc, data.damages[level] * 100, data.counts[level]);
+                break;
+			case ItemData.ItemType.Glove:
+			case ItemData.ItemType.Shoe:
+                //장비 설명에는 하나의 매개변수가 필요
+				textDesc.text = string.Format(data.itemDesc, data.damages[level] * 100);
+				break;
+            default:
+                //체력 회복은 매개변수가 필요가 없다.
+				textDesc.text = string.Format(data.itemDesc);
+				break;
+
+		}
+        
 	}
 
     //버튼이 클린된 경우 실행
