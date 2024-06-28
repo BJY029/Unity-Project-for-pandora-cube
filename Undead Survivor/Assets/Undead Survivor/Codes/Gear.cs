@@ -64,13 +64,15 @@ public class Gear : MonoBehaviour
 			{
 				//무기의 id가 0이면(근접 무기)
 				case 0:
+					float speed = 150 * Character.WeaponSpeed;
 					//해당 무기의 회전 속도 증가
-					weapon.speed = 150 + (150 * rate);
+					weapon.speed = speed + (speed * rate);
 					break;
 				//무기의 아이디가 0이 아니면(1, 원거리 무기)
 				default:
+					speed = 0.5f * Character.WeaponRate;
 					//해당 무기의 연사력 증가
-					weapon.speed = 0.5f * (1f - rate);
+					weapon.speed = speed * (1f - rate);
 					break;
 			}
 		}
@@ -80,7 +82,7 @@ public class Gear : MonoBehaviour
 	void SpeedUp()
 	{
 		//기본 이동속도 초기화
-		float speed = 5;
+		float speed = 3 * Character.Speed;
 
 		//플레이어의 이동속도 증가
 		GameManager.instance.player.speed = speed + speed * rate;

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
 	//레벨, 킬수, 경험치 변수 선언
 	[Header("# Player Info")]
+	public int playerId;
 	public float health;
 	public float maxHealth = 100;
 	public int level;
@@ -36,12 +37,15 @@ public class GameManager : MonoBehaviour
 		instance = this;
 	}
 
-	public void GameStart()
+	public void GameStart(int id)
 	{
-		health = maxHealth;
+		playerId = id;
 
-		//임시 스크립트
-		uiLevelUp.Select(0);
+		health = maxHealth;
+		
+		player.gameObject.SetActive(true);
+
+		uiLevelUp.Select(id % 2);
 
 		Resume();
 	}

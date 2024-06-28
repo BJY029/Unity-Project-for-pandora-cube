@@ -61,7 +61,7 @@ public class Weapon : MonoBehaviour
 
     public void LevelUp(float damage, int cnt)
     {
-        this.damage = damage;
+        this.damage = damage * Character.Damage;
         this.count += cnt;   
 
         if(id == 0) Batch();
@@ -85,8 +85,8 @@ public class Weapon : MonoBehaviour
         //..Property Setting
         //해당 무기 프로펩의 각종 데이터를 초기화
         id = data.itemId; 
-        damage =  data.baseDamage;
-        count = data.baseCount;
+        damage =  data.baseDamage * Character.Damage;
+        count = data.baseCount + Character.Count;
         
         //반복문을 통해서, poolmanager에 등록되어 있는 프리펩들을 돌아보고
         //같은 이름을 발견하면, 해당 인덱스를 프리펩id로 초기화
@@ -104,12 +104,12 @@ public class Weapon : MonoBehaviour
         switch (id)
         {
             case 0:
-                speed = 150;
+                speed = 150 * Character.WeaponSpeed;
                 Batch();
                 break;
             default:
                 //speed 값은 연사 속도를 의미
-                speed = 0.3f;
+                speed = 0.3f * Character.WeaponRate;
                 break;
         }
 
