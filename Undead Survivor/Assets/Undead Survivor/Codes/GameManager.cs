@@ -45,9 +45,15 @@ public class GameManager : MonoBehaviour
 		
 		player.gameObject.SetActive(true);
 
-		uiLevelUp.Select(id % 2);
+		uiLevelUp.Select(id % 2);	
 
 		Resume();
+
+		//배경음 호출
+		AudioManager.instance.PlayBgm(true);
+
+		//효과음 호출
+		AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
 	}
 
 	//게임 종료 함수
@@ -71,6 +77,10 @@ public class GameManager : MonoBehaviour
 
 		//Stop 함수를 호출하여 시간을 멈춘다.
 		Stop();
+
+		
+		AudioManager.instance.PlayBgm(false);
+		AudioManager.instance.PlaySfx(AudioManager.Sfx.Lose);
 	}
 
 	public void GameVictory()
@@ -96,6 +106,9 @@ public class GameManager : MonoBehaviour
 
 		//Stop 함수를 호출하여 시간을 멈춘다.
 		Stop();
+
+		AudioManager.instance.PlayBgm(false);
+		AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
 	}
 
 	public void GameRetry()

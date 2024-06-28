@@ -117,6 +117,7 @@ public class Enemy : MonoBehaviour
 		{
 			//애니메이션에서 Hit 트리거를 활성화 한다.
 			anim.SetTrigger("Hit");
+			AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
 		}
 		else
 		{
@@ -141,7 +142,10 @@ public class Enemy : MonoBehaviour
 
 			GameManager.instance.kill++;
 			GameManager.instance.GetExp();
-			
+
+			if(GameManager.instance.isLive)
+				AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
+
 		}
 	}
 

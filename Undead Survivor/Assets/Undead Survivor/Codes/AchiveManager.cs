@@ -115,8 +115,10 @@ public class AchiveManager : MonoBehaviour
         //해당 ui창을 활성화 시킨다
         uiNotice.SetActive(true);
 
-        //5초간 현실시간 딜레이
-        yield return wait;
+		AudioManager.instance.PlaySfx(AudioManager.Sfx.LevelUp);
+
+		//5초간 현실시간 딜레이
+		yield return wait;
 
         //해당 ui창 다시 비활성화
 		uiNotice.SetActive(false);

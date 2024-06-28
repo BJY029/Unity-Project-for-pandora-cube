@@ -31,8 +31,16 @@ public class Bullet : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-        if (!collision.CompareTag("Enemy") || per == -1)
+        if (!collision.CompareTag("Enemy"))
+        {
+			return;
+        }
+
+        if(per == -1)
+        {
+			AudioManager.instance.PlaySfx(AudioManager.Sfx.Melee);
             return;
+		}
 
         //적과 닿았고, 관통력이 -1이 아닌 경우 실행
         //관통력을 -1 한다.
