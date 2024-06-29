@@ -20,7 +20,6 @@ public class Reposition : MonoBehaviour
 		if (collision.CompareTag("size") == false)
 			return;
 
-		Debug.Log("An object with the 'Area' tag exited the trigger.");
 		//접촉한 경우에
 
 		//플레이어의 위치를 받아온다.

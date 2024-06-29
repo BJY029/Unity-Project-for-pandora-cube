@@ -30,11 +30,14 @@ public class GameManager : MonoBehaviour
 	public PoolManager pool;
 	public LevelUp uiLevelUp;
 	public Result uiResult;
+	public Transform uiJoy;
 	public GameObject enemyCleaner;
 
 	private void Awake()
 	{
 		instance = this;
+		//게임 실행시, 지정한 프레임 숫자로 설정하는 함수
+		Application.targetFrameRate = 60;
 	}
 
 	public void GameStart(int id)
@@ -111,6 +114,11 @@ public class GameManager : MonoBehaviour
 		AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
 	}
 
+	public void GameQuit()
+	{
+		Application.Quit();
+	}
+
 	public void GameRetry()
 	{
 		SceneManager.LoadScene(0);
@@ -162,6 +170,8 @@ public class GameManager : MonoBehaviour
 
 		//유니티의 시간 속도(배율)
 		Time.timeScale = 0;
+
+		uiJoy.localScale = Vector3.zero;
 	}
 
 	public void Resume()
@@ -170,5 +180,7 @@ public class GameManager : MonoBehaviour
 
 		//유니티의 시간 속도(배율)
 		Time.timeScale = 1;
+
+		uiJoy.localScale = Vector3.one;
 	}
 }

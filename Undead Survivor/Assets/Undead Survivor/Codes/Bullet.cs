@@ -59,7 +59,7 @@ public class Bullet : MonoBehaviour
     //사용자의 시야에서 총알이 벗어나면, 해당 총알을 비활성화 하는 함수
 	private void OnTriggerExit2D(Collider2D collision)
 	{
-		if (!collision.CompareTag("Area") || per == -100)
+		if (!collision.CompareTag("size") || per == -100)
 		{
 			return;
 		}
