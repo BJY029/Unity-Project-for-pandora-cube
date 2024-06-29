@@ -30,23 +30,26 @@ public class Reposition : MonoBehaviour
 		Vector3 playerPos = GameManager.instance.player.transform.position;
 		Vector3 myPos = transform.position;
 		
-		//거리 차이의 값을 절댓값으로 받아온다.
-		float diffX = Mathf.Abs(playerPos.x - myPos.x);
-		float diffY = Mathf.Abs(playerPos.y - myPos.y);
-
-		//바라보는 방향 값 설정
-		Vector3 playerDir = GameManager.instance.player.inputVec;
-		float dirX = playerDir.x < 0 ? -1 : 1;
-		float dirY = playerDir.y < 0 ? -1 : 1;
-
-
+		
 		//닿은 태그가 어떤건지 확인
 		switch (transform.tag)
 		{
 			//Ground 태그와 닿은 경우
 			case "Ground":
+
+				//거리 차이의 값을 절댓값으로 받아온다.
+				float diffX = (playerPos.x - myPos.x);
+				float diffY = (playerPos.y - myPos.y);
+
+				//바라보는 방향 값 설정
+				float dirX = diffX < 0 ? -1 : 1;
+				float dirY = diffY < 0 ? -1 : 1;
+
+				diffX = Mathf.Abs(diffX);
+				diffY = Mathf.Abs(diffY);
+
 				//만약 X축의 이동이 Y축 이동보다 더 큰 경우
-				if(diffX > diffY)
+				if (diffX > diffY)
 				{
 					//오른쪽 방향으로 40만큼 이동한다.
 					//x축 방향으로 1 * 방향 * 크기
@@ -62,11 +65,14 @@ public class Reposition : MonoBehaviour
 			case "Enemy":
 				if (coll.enabled) //몬스터가 살아있는 경우
 				{
+					Vector3 dist = playerPos - myPos;
+					Vector3 ran = new Vector3(Random.Range(-3, 3), Random.Range(-3, 3), 0);
 					//플레이어의 이동 방향에 따라 맞은 편에서 등장하도록 이동
 					//랜덤한 위치에서 등장하도록 벡터 더하기
-					transform.Translate(playerDir * 20 + new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f), 0f));
+					transform.Translate(ran + dist * 2);
 				}
 				break;
 		}
 	}
+
 }

@@ -9,6 +9,7 @@ public class Spawner : MonoBehaviour
 	//스폰할 포인터를 저장할 배열 선언
     public Transform[] spawnPoint;
 	public SpawnData[] spawnDatas;
+	public float levelTime;
 
 	int level;
 
@@ -21,6 +22,9 @@ public class Spawner : MonoBehaviour
 		//자기 자신이 0번째 인덱스로 저장된다.
 		//Spanwer 자기 자신과 자식들이 배열에 저장된다.
 		spawnPoint = GetComponentsInChildren<Transform>();
+		
+		//최대 시간에 몬스터 데이터 크기로 나누어 자동으로 구간 시간 계산
+		levelTime = GameManager.instance.maxGameTime / spawnDatas.Length;
 	}
 
 
@@ -35,7 +39,7 @@ public class Spawner : MonoBehaviour
 		//FloorToInt : 소수점 아래는 버리고 int 형으로 바꾸는 함수,
 		//CeilToInt : 소수점 아래를 올리고 int 형으로 바꾸는 함수
 		//10초가 지날때마다, 레벨이 1씩 증가한다.
-		level = Mathf.Min(Mathf.FloorToInt(GameManager.instance.gameTime / 10f), spawnDatas.Length - 1);
+		level = Mathf.Min(Mathf.FloorToInt(GameManager.instance.gameTime / levelTime), spawnDatas.Length - 1);
 
 		//시간이 0.2초가 지나면
 		if (timer > spawnDatas[level].spawnTime) 

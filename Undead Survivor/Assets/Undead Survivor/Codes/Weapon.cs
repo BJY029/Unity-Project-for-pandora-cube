@@ -161,8 +161,8 @@ public class Weapon : MonoBehaviour
             bullet.Translate(bullet.up * 1.5f, Space.World);
 
             //불러 온 무기의 속성 설정
-            //Bullet 스크립트의 Init() 함수를 호출하며, 인자를 현재 Weapon 변수인 damage와 -1을 넘겨준다.
-            bullet.GetComponent<Bullet>().Init(damage, -1, Vector3.zero); //-1은 Infinity Per로 근접무기는 관통력이 무한이다.
+            //Bullet 스크립트의 Init() 함수를 호출하며, 인자를 현재 Weapon 변수인 damage와 -100을 넘겨준다.
+            bullet.GetComponent<Bullet>().Init(damage, -100, Vector3.zero); //-100은 Infinity Per로 근접무기는 관통력이 무한이다.
         }
     }
 

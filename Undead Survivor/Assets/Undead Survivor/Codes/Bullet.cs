@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
 
         //관통이 -1(무한)보다 큰 것에 대해서는 속도를 적용한다.
         //즉, 총알인 경우
-        if(per > -1)
+        if(per >= 0)
         {
             //총알의 속도를 dir 값으로 초기화한다.
             rigid.velocity = dir * 15f;
@@ -36,7 +36,7 @@ public class Bullet : MonoBehaviour
 			return;
         }
 
-        if(per == -1)
+        if(per == -100)
         {
 			AudioManager.instance.PlaySfx(AudioManager.Sfx.Melee);
             return;
@@ -47,12 +47,23 @@ public class Bullet : MonoBehaviour
         per--;
 
         //만약 관통력이 -1이 되면
-        if(per == -1)
+        if(per < 0)
         {
             //해당 강체의 속도를 0으로 초기화 하고
             rigid.velocity = Vector2.zero;
             //해당 강체를 비활성화 한다.
             gameObject.SetActive(false);
         }
+	}
+
+    //사용자의 시야에서 총알이 벗어나면, 해당 총알을 비활성화 하는 함수
+	private void OnTriggerExit2D(Collider2D collision)
+	{
+		if (!collision.CompareTag("Area") || per == -100)
+		{
+			return;
+		}
+
+        gameObject.SetActive(false);
 	}
 }
